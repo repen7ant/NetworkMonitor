@@ -40,3 +40,14 @@ echo "$RAW_DATA" | awk '{
     
     printf "%-6s %-25s %-25s %-12s %-6s %s\n", proto, local_addr, remote_addr, state, pid, proc_name
 }'
+
+# 6. Display top 5 processes
+echo ""
+echo "Top processes:"
+
+echo "$RAW_DATA" | awk '{
+    if ($7 ~ /users:/) {
+        split($7, a, "\"")
+        print a[2]
+    }
+}' | sort | uniq -c | sort -nr | head -n 5 | awk '{print NR". "$2" — "$1" connections"}'
