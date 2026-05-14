@@ -2,7 +2,7 @@
 
 while true; do
     # 1. Fetch raw data.
-    RAW_DATA=$(sudo ss -tunapH)
+    RAW_DATA=$(ss -tunapH)
 
     # 2. Calculate statistics.
     TCP_COUNT=$(echo "$RAW_DATA" | grep -c "^tcp")
